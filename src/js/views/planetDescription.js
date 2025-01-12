@@ -12,7 +12,7 @@ export const PlanetDescription = () => {
     console.log(id);
     useEffect(() => {
         async function fetchData() {
-            const res = await fetch("https://swapi.dev/api/planets/"+id);
+            const res = await fetch("https://swapi.tech/api/planets/"+id);
             const data = await res.json();
             setPlanet(data);
         }

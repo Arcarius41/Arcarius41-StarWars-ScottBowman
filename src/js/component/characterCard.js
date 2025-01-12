@@ -11,7 +11,7 @@ export const CharacterCard = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch("https://swapi.dev/api/people/");
+      const res = await fetch("https://swapi.tech/api/people/");
       const data = await res.json();
       setCharacters(data.results);
     }

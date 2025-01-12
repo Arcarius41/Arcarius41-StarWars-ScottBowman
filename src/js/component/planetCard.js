@@ -11,7 +11,7 @@ export const PlanetCard = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch("https://swapi.dev/api/planets/");
+      const res = await fetch("https://swapi.tech/api/planets/");
       const data = await res.json();
       setPlanets(data.results);
     }

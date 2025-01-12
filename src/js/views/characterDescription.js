@@ -12,7 +12,7 @@ export const CharacterDescription = () => {
     console.log(id);
     useEffect(() => {
         async function fetchData() {
-            const res = await fetch("https://swapi.dev/api/people/"+id);
+            const res = await fetch("https://swapi.tech/api/people/"+id);
             const data = await res.json();
             setCharacter(data);
         }

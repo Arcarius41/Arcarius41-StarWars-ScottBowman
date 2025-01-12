@@ -11,7 +11,7 @@ export const StarShipCard = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch("https://swapi.dev/api/starships/");
+      const res = await fetch("https://swapi.tech/api/starships/");
       const data = await res.json();
       setstarShips(data.results);
     }

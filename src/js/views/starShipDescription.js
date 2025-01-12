@@ -27,7 +27,7 @@ export const StarShipDescription = () => {
     let newID = findNewId(id);
     useEffect(() => {
         async function fetchData() {
-            const res = await fetch("https://swapi.dev/api/starships/" + newID);
+            const res = await fetch("https://swapi.tech/api/starships/" + newID);
             const data = await res.json();
             setstarShip(data);
         }
