@@ -1,31 +1,38 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-
-
 export const PlanetDescription = () => {
-	const { store, actions } = useContext(Context);
-    const {id} = useParams();
-    const [planet, setPlanet] = useState([]);
-    console.log(id);
+    const { store, actions } = useContext(Context);
+    const { id } = useParams();
+    const [planet, setPlanet] = useState({});
+    console.log("Planet ID:", id);
+
     useEffect(() => {
         async function fetchData() {
-            const res = await fetch("https://swapi.tech/api/planets/"+id);
-            const data = await res.json();
-            setPlanet(data);
+            try {
+                const res = await fetch(`https://swapi.tech/api/planets/${id}`);
+                if (!res.ok) throw new Error(`Error: ${res.status}`);
+                const data = await res.json();
+                if (data.result) {
+                    setPlanet(data.result.properties);
+                } else {
+                    console.error("Planet data not found");
+                }
+            } catch (error) {
+                console.error("Error fetching planet data:", error);
+            }
         }
         fetchData();
-    }, []);
-	return (
-		<div className="container">
-            <div className="row">{planet.name}</div>
-            <div className="row">{planet.gravity}</div>
-            <div className="row">{planet.climate}</div>
-            <div className="row">{planet.terrain}</div>
-            <div className="row">{planet.population}</div>
+    }, [id]);
 
-		</div>
-	);
+    return (
+        <div className="container">
+            <h1>{planet.name}</h1>
+            <p><strong>Gravity:</strong> {planet.gravity}</p>
+            <p><strong>Climate:</strong> {planet.climate}</p>
+            <p><strong>Terrain:</strong> {planet.terrain}</p>
+            <p><strong>Population:</strong> {planet.population}</p>
+        </div>
+    );
 };
